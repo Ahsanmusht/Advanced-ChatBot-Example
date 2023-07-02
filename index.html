@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Advanced Chatbot Example</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    .chat-container {
+      height: 400px;
+      overflow-y: scroll;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+    }
+    .chat-message {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 15px;
+    }
+    .user-message {
+      text-align: right;
+      background-color: #e6f7ff;
+      color: #333333;
+    }
+    .bot-message {
+      text-align: left;
+      background-color: #f0f0f0;
+      color: #333333;
+    }
+    .input-container {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            Chatbot
+          </div>
+          <div class="card-body chat-container" id="chatArea">
+            <div class="chat-message bot-message">
+              <p>Welcome! How can I assist you today?</p>
+            </div>
+          </div>
+          <div class="card-footer input-container">
+            <input type="text" class="form-control" id="userInput" placeholder="Type your message...">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Advanced Chatbot implementation
+    const chatbot = {
+      response: {
+        default: "I'm sorry, I don't understand. Can you please rephrase your question?",
+        greetings: ["Hello!", "Hi there!", "Welcome! How can I assist you?"],
+        bye: ["Goodbye!", "See you later!", "Have a nice day!"],
+        thankYou: ["You're welcome!", "No problem!", "Glad I could help!"],
+        weather: ["The weather is sunny today.", "Expect some rain later.", "It's going to be a cold day."],
+        news: ["There's a new technology breakthrough.", "The stock market is performing well.", "Sports news: Team A wins the championship."],
+        question: ["I'm sorry, I cannot answer that question at the moment.", "I don't have the information you're looking for."],
+        response1: ["Response 1", "Response 1", "Response 1", "Additional data 1", "Additional data 2"],
+        response2: ["Response 2", "Response 2", "Response 2", "Additional data 1", "Additional data 2"],
+        response3: ["Response 3", "Response 3", "Response 3", "Additional data 1", "Additional data 2"],
+        response4: ["Response 4", "Response 4", "Response 4", "Additional data 1", "Additional data 2"],
+        response5: ["Response 5", "Response 5", "Response 5", "Additional data 1", "Additional data 2"],
+        response6: ["Response 6", "Response 6", "Response 6"],
+        response7: ["Response 7", "Response 7", "Response 7"],
+        response8: ["Response 8", "Response 8", "Response 8"],
+        response9: ["Response 9", "Response 9", "Response 9"],
+        response10: ["Response 10", "Response 10", "Response 10"],
+      },
+      processMessage: function (message) {
+        const lowercaseMessage = message.toLowerCase();
+        let response = this.response.default;
+
+        if (lowercaseMessage.includes("hello") || lowercaseMessage.includes("hi")) {
+          response = this.response.greetings[Math.floor(Math.random() * this.response.greetings.length)];
+        } else if (lowercaseMessage.includes("bye")) {
+          response = this.response.bye[Math.floor(Math.random() * this.response.bye.length)];
+        } else if (lowercaseMessage.includes("thank you") || lowercaseMessage.includes("thanks")) {
+          response = this.response.thankYou[Math.floor(Math.random() * this.response.thankYou.length)];
+        } else if (lowercaseMessage.includes("weather")) {
+          response = this.response.weather[Math.floor(Math.random() * this.response.weather.length)];
+        } else if (lowercaseMessage.includes("news")) {
+          response = this.response.news[Math.floor(Math.random() * this.response.news.length)];
+        } else if (lowercaseMessage.includes("question")) {
+          response = this.response.question[Math.floor(Math.random() * this.response.question.length)];
+        } else if (lowercaseMessage.includes("response1")) {
+          response = this.response.response1[Math.floor(Math.random() * this.response.response1.length)];
+        } else if (lowercaseMessage.includes("response2")) {
+          response = this.response.response2[Math.floor(Math.random() * this.response.response2.length)];
+        } else if (lowercaseMessage.includes("response3")) {
+          response = this.response.response3[Math.floor(Math.random() * this.response.response3.length)];
+        } else if (lowercaseMessage.includes("response4")) {
+          response = this.response.response4[Math.floor(Math.random() * this.response.response4.length)];
+        } else if (lowercaseMessage.includes("response5")) {
+          response = this.response.response5[Math.floor(Math.random() * this.response.response5.length)];
+        } else if (lowercaseMessage.includes("response6")) {
+          response = this.response.response6[Math.floor(Math.random() * this.response.response6.length)];
+        } else if (lowercaseMessage.includes("response7")) {
+          response = this.response.response7[Math.floor(Math.random() * this.response.response7.length)];
+        } else if (lowercaseMessage.includes("response8")) {
+          response = this.response.response8[Math.floor(Math.random() * this.response.response8.length)];
+        } else if (lowercaseMessage.includes("response9")) {
+          response = this.response.response9[Math.floor(Math.random() * this.response.response9.length)];
+        } else if (lowercaseMessage.includes("response10")) {
+          response = this.response.response10[Math.floor(Math.random() * this.response.response10.length)];
+        }
+
+        return response;
+      },
+      displayMessage: function (message, sender) {
+        const chatArea = document.getElementById("chatArea");
+        const messageContainer = document.createElement("div");
+        messageContainer.classList.add("chat-message");
+
+        if (sender === "user") {
+          messageContainer.classList.add("user-message");
+        } else {
+          messageContainer.classList.add("bot-message");
+        }
+
+        messageContainer.innerHTML = `<p>${message}</p>`;
+        chatArea.appendChild(messageContainer);
+      },
+      init: function () {
+        const userInput = document.getElementById("userInput");
+        const self = this;
+
+        userInput.addEventListener("keyup", function (event) {
+          if (event.key === "Enter") {
+            const message = userInput.value.trim();
+
+            if (message !== "") {
+              self.displayMessage(message, "user");
+
+              const botResponse = self.processMessage(message);
+              self.displayMessage(botResponse, "bot");
+
+              userInput.value = "";
+            }
+          }
+        });
+      },
+    };
+
+    // Initialize the chatbot
+    chatbot.init();
+  </script>
+</body>
+</html>
